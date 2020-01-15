@@ -41,8 +41,8 @@ namespace Venier.IOTHub.Device
                     Console.WriteLine("Failed to create DeviceClient!");
                 }
 
-                var sample = new DeviceMessage(deviceClient);
-                sample.RunSampleAsync().GetAwaiter().GetResult();
+                //var sample = new DeviceMessage(deviceClient);
+                //sample.RunSampleAsync().GetAwaiter().GetResult();
 
                 Console.WriteLine("Done.\n");
                 await Task.Delay(1000, stoppingToken);

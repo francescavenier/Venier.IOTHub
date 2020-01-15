@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Venier.IOTHub.Device", "Venier.IOTHub.Device\Venier.IOTHub.Device.csproj", "{544EFDAF-A3F9-4944-A907-68BA1CCF6108}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Venier.IOTHub.Device", "Venier.IOTHub.Device\Venier.IOTHub.Device.csproj", "{544EFDAF-A3F9-4944-A907-68BA1CCF6108}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Venier.IOTHub.Data", "Venier.IOTHub.Data\Venier.IOTHub.Data.csproj", "{9BD90149-0142-4A8B-AFC1-EE7E56073DFA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Venier.IOTHub.WebApp", "Venier.IOTHub.WebApp\Venier.IOTHub.WebApp.csproj", "{13FBC362-34C4-493F-A1AB-75CD19CB53A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Venier.IOTHub.WebApp", "Venier.IOTHub.WebApp\Venier.IOTHub.WebApp.csproj", "{13FBC362-34C4-493F-A1AB-75CD19CB53A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{544EFDAF-A3F9-4944-A907-68BA1CCF6108}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{544EFDAF-A3F9-4944-A907-68BA1CCF6108}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{544EFDAF-A3F9-4944-A907-68BA1CCF6108}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9BD90149-0142-4A8B-AFC1-EE7E56073DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9BD90149-0142-4A8B-AFC1-EE7E56073DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9BD90149-0142-4A8B-AFC1-EE7E56073DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9BD90149-0142-4A8B-AFC1-EE7E56073DFA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{13FBC362-34C4-493F-A1AB-75CD19CB53A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{13FBC362-34C4-493F-A1AB-75CD19CB53A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13FBC362-34C4-493F-A1AB-75CD19CB53A8}.Release|Any CPU.ActiveCfg = Release|Any CPU

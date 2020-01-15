@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "Venier.IOTHub.Device": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

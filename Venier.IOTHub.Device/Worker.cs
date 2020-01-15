@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Venier.IOTHub.Data;
 
 namespace Venier.IOTHub.Device
 {
@@ -23,29 +23,23 @@ namespace Venier.IOTHub.Device
         }
 
         private static TransportType s_transportType = TransportType.Http1;
-        
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             string deviceConnectionString = _configuration.GetConnectionString("connectionString");
+            DeviceClient deviceClient = DeviceClient.CreateFromConnectionString(deviceConnectionString, s_transportType);
+
+
             while (!stoppingToken.IsCancellationRequested)
             {
+                var receivedMessage = await deviceClient.ReceiveAsync().ConfigureAwait(false);
 
-                if (string.IsNullOrEmpty(deviceConnectionString) && deviceConnectionString.Length > 0)
+                if (receivedMessage != null)
                 {
-                    deviceConnectionString = _configuration.GetConnectionString("connectionString");
+                    var messageData = Encoding.ASCII.GetString(receivedMessage.GetBytes());
+                    Console.WriteLine("\t{0}> Received message: {1}", DateTime.Now.ToLocalTime(), messageData);
+
                 }
-
-                DeviceClient deviceClient = DeviceClient.CreateFromConnectionString(deviceConnectionString, s_transportType);
-
-                if (deviceClient == null)
-                {
-                    Console.WriteLine("Failed to create DeviceClient!");
-                }
-
-                var device = new DeviceMessage(deviceClient);
-                device.RunSampleAsync().GetAwaiter().GetResult();
-
-                Console.WriteLine("Done.\n");
                 await Task.Delay(1000, stoppingToken);
             }
         }

@@ -29,9 +29,9 @@ namespace Venier.IOTHub.Device
             while (!stoppingToken.IsCancellationRequested)
             {
 
-                if (string.IsNullOrEmpty(deviceConnectionString) && args.Length > 0)
+                if (string.IsNullOrEmpty(deviceConnectionString) && _configuration.GetConnectionString("DeviceConnectionString").Length > 0)
                 {
-                    deviceConnectionString = args[0];
+                    deviceConnectionString = _configuration.GetConnectionString("DeviceConnectionString");
                 }
 
                 DeviceClient deviceClient = DeviceClient.CreateFromConnectionString(deviceConnectionString, s_transportType);
@@ -41,7 +41,7 @@ namespace Venier.IOTHub.Device
                     Console.WriteLine("Failed to create DeviceClient!");
                 }
 
-                var sample = new MessageSample(deviceClient);
+                var sample = new DeviceMessage(deviceClient);
                 sample.RunSampleAsync().GetAwaiter().GetResult();
 
                 Console.WriteLine("Done.\n");

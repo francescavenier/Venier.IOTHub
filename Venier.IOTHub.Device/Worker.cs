@@ -7,6 +7,7 @@ using Microsoft.Azure.Devices.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Venier.IOTHub.Data;
 
 namespace Venier.IOTHub.Device
 {
@@ -20,18 +21,18 @@ namespace Venier.IOTHub.Device
             _logger = logger;
             _configuration = configuration;
         }
-        
-        private static TransportType s_transportType = TransportType.Amqp;
+
+        private static TransportType s_transportType = TransportType.Http1;
         
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            string deviceConnectionString = _configuration.GetConnectionString("DeviceConnectionString");
+            string deviceConnectionString = _configuration.GetConnectionString("connectionString");
             while (!stoppingToken.IsCancellationRequested)
             {
 
-                if (string.IsNullOrEmpty(deviceConnectionString) && _configuration.GetConnectionString("DeviceConnectionString").Length > 0)
+                if (string.IsNullOrEmpty(deviceConnectionString) && deviceConnectionString.Length > 0)
                 {
-                    deviceConnectionString = _configuration.GetConnectionString("DeviceConnectionString");
+                    deviceConnectionString = _configuration.GetConnectionString("connectionString");
                 }
 
                 DeviceClient deviceClient = DeviceClient.CreateFromConnectionString(deviceConnectionString, s_transportType);
@@ -41,8 +42,8 @@ namespace Venier.IOTHub.Device
                     Console.WriteLine("Failed to create DeviceClient!");
                 }
 
-                //var sample = new DeviceMessage(deviceClient);
-                //sample.RunSampleAsync().GetAwaiter().GetResult();
+                var device = new DeviceMessage(deviceClient);
+                device.RunSampleAsync().GetAwaiter().GetResult();
 
                 Console.WriteLine("Done.\n");
                 await Task.Delay(1000, stoppingToken);

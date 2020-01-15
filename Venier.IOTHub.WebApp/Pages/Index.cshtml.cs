@@ -41,10 +41,10 @@ namespace Venier.IOTHub.WebApp.Pages
         {
             if (ModelState.IsValid)
             {
-                var BitMessage = new Message(Encoding.ASCII.GetBytes(message));
+                var ConvertedMessage = new Message(Encoding.ASCII.GetBytes(message));
                 ServiceClient serviceClient = ServiceClient.CreateFromConnectionString(connectionString, s_transportType);
-                serviceClient.SendAsync(deviceId, BitMessage).ConfigureAwait(false);
-                return RedirectToPage("/Confirm"); // da modificare il redirect
+                serviceClient.SendAsync(deviceId, ConvertedMessage).ConfigureAwait(false);
+                return RedirectToPage("/Confirm");
             }
             return RedirectToPage("/error404");
 

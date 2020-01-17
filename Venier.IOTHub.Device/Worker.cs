@@ -40,7 +40,10 @@ namespace Venier.IOTHub.Device
                     Console.WriteLine("\t{0}> Received message: {1}", DateTime.Now.ToLocalTime(), messageData);
 
                 }
-                await Task.Delay(1000, stoppingToken);
+                else 
+                { 
+                    await Task.Delay(2000, stoppingToken);
+                }
             }
         }
     }

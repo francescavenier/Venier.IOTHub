@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,10 +20,19 @@ namespace Venier.IOTHub.WebApp.Pages
         private static TransportType s_transportType = TransportType.Amqp;
 
         [BindProperty]
-        public string message { get; set; }
+        public InputModel input { get; set; }
 
-        [BindProperty]
-        public string deviceId { get; set; }
+        public string[] Devices = new string[] { "device1", "device2" };
+
+        public class InputModel
+        {
+            [Required]
+            public string message { get; set; }
+            [Required]
+            public string deviceId { get; set; }
+
+        }
+        
 
         public string connectionString { get { return _configuration.GetConnectionString("connectionString"); } }
 
@@ -37,13 +47,13 @@ namespace Venier.IOTHub.WebApp.Pages
 
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
             {
-                var ConvertedMessage = new Message(Encoding.ASCII.GetBytes(message));
+                var ConvertedMessage = new Message(Encoding.ASCII.GetBytes(input.message));
                 ServiceClient serviceClient = ServiceClient.CreateFromConnectionString(connectionString, s_transportType);
-                serviceClient.SendAsync(deviceId, ConvertedMessage).ConfigureAwait(false);
+                await serviceClient.SendAsync(input.deviceId, ConvertedMessage).ConfigureAwait(false);
                 return RedirectToPage("/Confirm");
             }
             return RedirectToPage("/error404");

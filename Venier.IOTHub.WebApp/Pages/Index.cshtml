@@ -9,14 +9,17 @@
     <form method="post">
         <div class="form-group">
             <label for="exampleFormControlSelect1">Select device</label>
-            <select class="form-control" asp-for="deviceId">
-                <option>device1</option>
-                <option>device2</option>
+            <select class="form-control" asp-for="input.deviceId">
+                @foreach (var device in Model.Devices)
+                {
+                    <option>@device</option>
+
+                }
             </select>
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Message</label>
-            <textarea class="form-control" asp-for="message" rows="3"></textarea>
+            <textarea class="form-control" asp-for="input.message" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-primary" style="float:right;">Send</button>
     </form>
